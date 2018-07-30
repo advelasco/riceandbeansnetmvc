@@ -16,7 +16,7 @@
 
         public ActionResult Index()
         {
-            var allCategories = _categoryService.GetAll()?.ToList().Select(m => new QuickDetailsCategoryViewModel { Id = m.Id, Name = m.Name }); ;
+            var allCategories = _categoryService.GetAll()?.ToList().Select(m => new QuickDetailsCategoryViewModel { Id = m.Id, Name = m.Name, Parent = m.Parent }); ;
             return View(allCategories);
         }
 
@@ -39,6 +39,45 @@
                 if(ModelState.IsValid)
                 {
                     _categoryService.QuickInsert(new DTO.QuickCreationDTO { CategoryName = model.CategoryName, Enabled = true });
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    return RedirectToAction("Index");
+                }
+            }
+            catch (System.Exception ex)
+            {
+                return View();
+            }
+        }
+
+        public ActionResult FullCreate()
+        {
+            ViewBag.ParentCategory = _categoryService.GetAll().Select(x =>
+                                  new SelectListItem()
+                                  {
+                                      Value = x.Id.ToString(),
+                                      Text = x.Name
+                                  });
+            return View();
+        }
+
+
+        [HttpPost]
+        public ActionResult FullCreate(FullCategoryViewModel model)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    _categoryService.FullInsert(new DTO.FullCreationDTO {
+                        Name = model.Name,
+                        LongDescription = model.LongDescription,
+                        ShortDescription = model.ShortDescription,
+                        ParentCategoryId = model.ParentCategoryId,
+                        Tags = model.Tags});
+
                     return RedirectToAction("Index");
                 }
                 else

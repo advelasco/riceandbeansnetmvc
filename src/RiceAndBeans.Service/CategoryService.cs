@@ -18,9 +18,24 @@
             _categoryRepository = categoryRepository;
         }
 
+        public void FullInsert(FullCreationDTO fullCategory)
+        {
+            _categoryRepository.Insert(new Model.CategoryModel
+            {
+                Id = System.Guid.NewGuid(),
+                Name = fullCategory.Name,
+                LongDescription = fullCategory.LongDescription,
+                ShortDescription = fullCategory.ShortDescription,
+                ParentCategoryId = fullCategory.ParentCategoryId,
+                Enabled = true
+            });
+
+            _unityOfWork.Save();
+        }
+
         public IEnumerable<QuickViewDTO> GetAll()
         {
-            return _categoryRepository.GetAll()?.ToList().Select(m => new QuickViewDTO { Id = m.Id, Name = m.Name });
+            return _categoryRepository.GetAll()?.ToList().Select(m => new QuickViewDTO { Id = m.Id, Name = m.Name, Parent = m.Parent?.Name });
         }
 
         public void QuickInsert(QuickCreationDTO quickCategory)

@@ -192,6 +192,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModel\FullCategoryViewModel.cs" />
     <Compile Include="ViewModel\QuickCategoryViewModel.cs" />
     <Compile Include="ViewModel\QuickDetailsCategoryViewModel.cs" />
   </ItemGroup>
@@ -236,6 +237,7 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Category\QuickCreate.cshtml" />
     <Content Include="Views\Category\Index.cshtml" />
+    <Content Include="Views\Category\FullCreate.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

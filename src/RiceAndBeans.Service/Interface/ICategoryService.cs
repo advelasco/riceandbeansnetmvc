@@ -7,5 +7,6 @@
     {
         IEnumerable<QuickViewDTO> GetAll();
         void QuickInsert(QuickCreationDTO quickCategory);
+        void FullInsert(FullCreationDTO fullCategory);
     }
 }

@@ -41,6 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="FullCreationDTO.cs" />
     <Compile Include="QuickViewDTO.cs" />
     <Compile Include="QuickCreationDTO.cs" />
   </ItemGroup>
